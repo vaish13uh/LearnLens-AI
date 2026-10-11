@@ -1,81 +1,62 @@
-# LearnLens AI
+# LearnLens-AI 📚
 
-Adaptive learning intelligence using machine learning and
-knowledge tracing.
+**An adaptive learning analytics project that uses machine learning and learning-history features to estimate student performance and track topic mastery.**
 
-## Project goals
+LearnLens-AI explores how student interaction data can be used to understand learning progress, estimate the likelihood of correct responses, and identify topics that may need additional practice.
 
-- Analyse student-question response histories.
-- Estimate knowledge mastery by concept.
-- Predict future question correctness.
-- Evaluate models on held-out student data.
-- Explore personalised practice recommendations.
+## ✨ Features
 
-## Current status
+- **History-aware prediction:** Uses previous student interactions to construct learning-history features.
+- **Student performance analysis:** Evaluates predictions using accuracy, ROC-AUC, Brier score, and log loss.
+- **Topic mastery tracking:** Organizes learning progress by topic and learning track.
+- **Attempt tracking:** Records practice attempts and correctness for individual learners.
+- **Progress reports:** Summarizes attempts, accuracy, and topic-level performance.
+- **Interactive dashboard:** Provides an interface for exploring learner progress and practice activity.
 
-Initial development: evaluation utilities and tests.
+## 🧠 Machine Learning Approach
 
-Model performance will be reported only after experiments on
-a documented dataset with an appropriate evaluation split.
+The project uses a logistic regression model with features derived from prior student interactions.
 
-## Planned stack
+The feature engineering pipeline is designed to use information available before each response, helping avoid using the current response to construct its own prediction features.
 
-Python, pandas, NumPy, scikit-learn, pytest, FastAPI,
-Streamlit and PostgreSQL.
+### Dataset and Evaluation
 
-## Getting started
+| Metric | Majority-class baseline | History-aware model |
+|---|---:|---:|
+| Accuracy | 68.89% | 73.46% |
+| ROC-AUC | 0.5000 | 0.7619 |
+| Brier score | 0.2145 | 0.1742 |
+| Log loss | 0.6203 | 0.5203 |
 
-Install dependencies:
+The history-aware model outperformed the majority-class baseline across the reported metrics. These results are experimental and do not establish improved real-world learning outcomes.
 
-```bash
-pip install -r requirements.txt
-pytest -q
-```
+**Evaluation note:** The split preserves chronological order within each student's interaction history. Students may appear in both training and test periods, so this evaluation does not measure generalization to entirely unseen students.
 
-## First experiments
+See [`docs/results.md`](docs/results.md) for experiment details and limitations.
 
-Dataset: ASSISTments Skill Builder (525,534 interactions, 4,217 students).
+## 🛠️ Tech Stack
 
-| Experiment | Accuracy | ROC-AUC | Brier score | Log loss |
-|---|---:|---:|---:|---:|
-| Majority-class baseline, unseen students | 68.57% | 0.5000 | 0.2156 | 0.6226 |
-| Logistic regression, unseen students | 69.07% | 0.6568 | 0.2010 | 0.5856 |
-| History-aware logistic regression, chronological split | 73.45% | 0.7619 | 0.1742 | 0.5203 |
+- Python
+- pandas and NumPy
+- scikit-learn
+- Streamlit
+- pytest
+- JSON and JSONL for learner activity storage
 
-The history-aware experiment uses prior student and student-skill performance
-features. The reusable training pipeline has now been run successfully on the full
-dataset, and its fresh metrics match the recorded results to rounding. Its test split differs from the unseen-student experiment, so these
-scores are not a direct apples-to-apples comparison. The observed results are
-recorded in `reports/experiment_results.json`; rerun the training script to
-reproduce metrics from the local dataset.
+## 📊 Reports and Reproducibility
 
-## Run locally
+Experiment results and supporting documentation are available in the `docs/` and `reports/` directories.
 
-Install dependencies with `pip install -r requirements.txt`, then run:
+For reproducible evaluation, use the documented data split, feature-generation process, and model configuration. Performance metrics may vary if the dataset, preprocessing, or evaluation procedure changes.
 
-`python -m src.train --data /path/to/skill_builder_data.csv`
+## 🔮 Future Improvements
 
-The dataset is not included in this repository.
+- Improve the interactive learning experience and dashboard design.
+- Add more robust learner-specific mastery estimates.
+- Compare against stronger baseline models.
+- Evaluate performance on unseen students and alternative chronological splits.
+- Add targeted revision recommendations based on learning history.
+- Improve data persistence and deployment support.
 
-## Skill Mastery Tracker
 
-LearnLens AI estimates student-skill mastery from historical answer
-correctness. It uses a smoothed accuracy estimate to reduce overconfidence
-when only a few attempts are available.
-
-**Features**
-- Tracks attempts and correct answers by student and skill.
-- Calculates mastery estimates and categorises skills as needing practice,
-  developing, or strong.
-- Ranks attempted skills to help prioritise practice.
-- Separates mastery before and after an answer to avoid using the current
-  response in its own pre-answer estimate.
-
-**Run the tests**
-```bash
-python -m pytest -q
-```
-
-**Important limitation:** These estimates reflect observed answer correctness,
-not a validated measurement of underlying knowledge. Recommendations depend
-on the student's available interaction history.
+*LearnLens-AI is an experimental machine-learning and learning-analytics project. Predictions and mastery estimates are intended to support exploration and practice, not replace formal assessments.*
