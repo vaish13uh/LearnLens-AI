@@ -1,0 +1,24 @@
+{
+  "dataset": "ASSISTments Skill Builder",
+  "dataset_rows": 525534,
+  "dataset_students": 4217,
+  "baseline_unseen_students": {
+    "accuracy": 0.6857,
+    "roc_auc": 0.5,
+    "brier_score": 0.2156,
+    "log_loss": 0.6226
+  },
+  "logistic_regression_unseen_students": {
+    "accuracy": 0.6907,
+    "roc_auc": 0.6568,
+    "brier_score": 0.201,
+    "log_loss": 0.5856
+  },
+  "history_aware_logistic_regression": {
+    "accuracy": 0.7345,
+    "roc_auc": 0.7619,
+    "brier_score": 0.1742,
+    "log_loss": 0.5203
+  },
+  "note": "The two experiments use different evaluation splits. The history-aware metrics were observed in Colab; the reproducible script has not yet been rerun to verify them."
+}
