@@ -56,3 +56,26 @@ Install dependencies with `pip install -r requirements.txt`, then run:
 `python -m src.train --data /path/to/skill_builder_data.csv`
 
 The dataset is not included in this repository.
+
+## Skill Mastery Tracker
+
+LearnLens AI estimates student-skill mastery from historical answer
+correctness. It uses a smoothed accuracy estimate to reduce overconfidence
+when only a few attempts are available.
+
+**Features**
+- Tracks attempts and correct answers by student and skill.
+- Calculates mastery estimates and categorises skills as needing practice,
+  developing, or strong.
+- Ranks attempted skills to help prioritise practice.
+- Separates mastery before and after an answer to avoid using the current
+  response in its own pre-answer estimate.
+
+**Run the tests**
+```bash
+python -m pytest -q
+```
+
+**Important limitation:** These estimates reflect observed answer correctness,
+not a validated measurement of underlying knowledge. Recommendations depend
+on the student's available interaction history.

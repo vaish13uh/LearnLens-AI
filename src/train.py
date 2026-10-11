@@ -36,7 +36,7 @@ def evaluate(y_true, probabilities):
 
 
 def run_experiment(csv_path, output_dir="reports"):
-    data = pd.read_csv(csv_path, low_memory=False)
+    data = pd.read_csv(csv_path, encoding="cp1252", low_memory=False)
     data = build_history_features(data)
 
     train = data[data["is_train"]].copy()
