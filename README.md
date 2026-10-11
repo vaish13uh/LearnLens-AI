@@ -43,7 +43,8 @@ Dataset: ASSISTments Skill Builder (525,534 interactions, 4,217 students).
 | History-aware logistic regression, chronological split | 73.45% | 0.7619 | 0.1742 | 0.5203 |
 
 The history-aware experiment uses prior student and student-skill performance
-features. Its test split differs from the unseen-student experiment, so these
+features. The reusable training pipeline has now been run successfully on the full
+dataset, and its fresh metrics match the recorded results to rounding. Its test split differs from the unseen-student experiment, so these
 scores are not a direct apples-to-apples comparison. The observed results are
 recorded in `reports/experiment_results.json`; rerun the training script to
 reproduce metrics from the local dataset.

@@ -1,0 +1,19 @@
+{
+  "evaluation": "per-student chronological 80/20 split",
+  "train_rows": 422038,
+  "test_rows": 103496,
+  "train_students": 4217,
+  "test_students": 3776,
+  "baseline": {
+    "accuracy": 0.6888865270155369,
+    "roc_auc": 0.5,
+    "brier_score": 0.21445934978836806,
+    "log_loss": 0.6203051366620996
+  },
+  "history_aware_logistic_regression": {
+    "accuracy": 0.734608100796166,
+    "roc_auc": 0.7618967021815817,
+    "brier_score": 0.17424347183277622,
+    "log_loss": 0.5202670072133027
+  }
+}
