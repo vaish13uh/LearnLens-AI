@@ -4,7 +4,8 @@ __pycache__/
 .venv/
 venv/
 .env
-data/
+   data/attempts.jsonl
+   data/*.csv
 models/
 *.joblib
 .ipynb_checkpoints/
